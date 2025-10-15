@@ -31,24 +31,6 @@
       .font-handwriting {
         font-family: "Dancing Script", cursive;
       }
-      /* Tùy chỉnh cho timeline trên màn hình lớn */
-      @media (min-width: 768px) {
-        .timeline-item::after {
-          content: "";
-          position: absolute;
-          width: 25px;
-          height: 25px;
-          right: -13px;
-          background-color: white;
-          border: 4px solid #ff99b4; /* Màu hồng đậm hơn */
-          top: 15px;
-          border-radius: 50%;
-          z-index: 1;
-        }
-        .timeline-container.left .timeline-item::after {
-          left: -12px;
-        }
-      }
 
       /* CSS cho hiệu ứng lật thẻ */
       .flip-card {
@@ -78,7 +60,8 @@
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
         border-radius: 0.5rem;
-        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -98,707 +81,821 @@
         height: 100%;
         object-fit: cover;
       }
+
+      /* CSS cho thanh loading */
+      @keyframes loading {
+        from {
+          width: 0%;
+        }
+        to {
+          width: 100%;
+        }
+      }
+      #loading-bar {
+        animation: loading 3s ease-in-out forwards;
+      }
     </style>
     <!-- animation -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   </head>
   <body class="text-gray-800">
-    <!-- Phần 1: Lời Chào Mở Đầu -->
-    <header
-      id="home"
-      class="relative h-screen flex items-center justify-center text-center bg-cover bg-center"
-      style="background-image: url('./assets/img/baoTang.jpeg')"
-    >
-      <!-- Lớp phủ màu tối để chữ dễ đọc hơn -->
-      <div class="absolute inset-0 bg-black opacity-40"></div>
-      <div class="relative z-10 p-4">
-        <h1
-          class="font-handwriting text-white text-5xl md:text-8xl mb-4 animate-fade-in-down"
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 bg-pink-100 flex flex-col items-center justify-center z-50 transition-opacity duration-1000">
+        <h1 class="font-handwriting text-pink-600 text-4xl sm:text-5xl md:text-6xl mb-6 text-center px-4">Chào mừng đến với hành trình yêu của chúng ta</h1>
+        <p class="text-gray-600 text-lg mb-8">...cùng khám phá nhé!</p>
+        <div class="w-3/4 max-w-sm bg-pink-200 rounded-full h-4 overflow-hidden">
+            <div id="loading-bar" class="bg-pink-500 h-4 rounded-full"></div>
+        </div>
+    </div>
+
+    <!-- Main Content (ban đầu ẩn đi) -->
+    <div id="main-content" class="opacity-0">
+        <!-- Phần 1: Lời Chào Mở Đầu -->
+        <header
+          id="home"
+          class="relative h-screen flex items-center justify-center text-center bg-cover bg-center"
+          style="background-image: url('./assets/img/baoTang.jpeg')"
         >
-          Mừng ngày 20/10, người con gái anh yêu!
-        </h1>
-        <p class="text-white text-lg md:text-2xl mb-8 animate-fade-in-up">
-          Anh có một vài điều nhỏ muốn gửi đến em...
-        </p>
-        <a
-          href="#story"
-          class="bg-pink-500 text-white font-bold py-3 px-8 rounded-full hover:bg-pink-600 transition duration-300 transform hover:scale-105"
-        >
-          Khám phá ngay!
-        </a>
-      </div>
-    </header>
-
-    <main>
-      <!-- Phần 2: Câu Chuyện Của Chúng Ta -->
-      <section id="story" class="py-20 px-4 bg-white">
-        <div class="container mx-auto">
-          <h2
-            class="font-handwriting text-center text-4xl md:text-6xl mb-12 text-pink-600"
-          >
-            TimeLine Tình Yêu
-          </h2>
-          <div class="relative max-w-4xl mx-auto">
-            <!-- Đường kẻ dọc của timeline -->
-            <div
-              class="absolute left-1/2 w-1 bg-pink-200 h-full transform -translate-x-1/2"
-            ></div>
-
-            <!-- Cột mốc 1 -->
-            <div
-              class="mb-8 flex justify-between items-center w-full right-timeline"
-              data-aos="fade-right"
+          <!-- Lớp phủ màu tối để chữ dễ đọc hơn -->
+          <div class="absolute inset-0 bg-black opacity-40"></div>
+          <div class="relative z-10 p-4">
+            <h1
+              class="font-handwriting text-white text-5xl sm:text-6xl md:text-8xl mb-4"
             >
-              <div class="order-1 w-5/12"></div>
-              <div
-                class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
-              >
-                <h1 class="mx-auto font-semibold text-lg text-white">1</h1>
-              </div>
-              <div
-                class="order-1 bg-pink-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-              >
-                <img
-                  src="./assets/img/IMG_0044.jpg"
-                  class="rounded-lg mb-3"
-                  alt="Buổi hẹn đầu tiên"
-                />
-                <h3 class="font-bold text-pink-800 text-xl">
-                  Buổi hẹn đầu tiên
-                </h3>
-                <p class="text-sm leading-snug tracking-wide text-gray-600">
-                  Ngày định mệnh đã mang em đến bên anh, một ngày mà anh sẽ
-                  không bao giờ quên.
-                </p>
-              </div>
-            </div>
-
-            <!-- Cột mốc 2 -->
-            <div
-              class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline"
-              data-aos="fade-left"
+              Mừng ngày 20/10, người con gái anh yêu!
+            </h1>
+            <p class="text-white text-lg md:text-2xl mb-8">
+              Anh có một vài điều nhỏ muốn gửi đến em...
+            </p>
+            <a
+              href="#story"
+              class="bg-pink-500 text-white font-bold py-3 px-8 rounded-full hover:bg-pink-600 transition duration-300 transform hover:scale-105"
             >
-              <div class="order-1 w-5/12"></div>
-              <div
-                class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
-              >
-                <h1 class="mx-auto text-white font-semibold text-lg">2</h1>
-              </div>
-              <div
-                class="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-              >
-                <img
-                  src="./assets/img/IMG_0974.jpg"
-                  class="rounded-lg mb-3"
-                  alt="Buổi hẹn thứ 2"
-                />
-                <h3 class="font-bold text-gray-800 text-xl">Buổi hẹn thứ 2</h3>
-                <p class="text-sm leading-snug tracking-wide text-gray-600">
-                  Buổi tối hôm ấy, anh biết mình đã 'say' em thật rồi. Nụ cười
-                  của em làm bừng sáng cả thế giới.
-                </p>
-              </div>
-            </div>
-
-            <!-- Cột mốc 3 -->
-            <div
-              class="mb-8 flex justify-between items-center w-full right-timeline"
-              data-aos="fade-right"
-            >
-              <div class="order-1 w-5/12"></div>
-              <div
-                class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
-              >
-                <h1 class="mx-auto font-semibold text-lg text-white">3</h1>
-              </div>
-              <div
-                class="order-1 bg-pink-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-              >
-                <img
-                  src="./assets/img/1I2OVIHRO_4RF6IB.jpg"
-                  class="rounded-lg mb-3"
-                  alt="Chuyến đi chơi"
-                />
-                <h3 class="font-bold text-pink-800 text-xl">
-                  Chuyến đi xa đầu tiên
-                </h3>
-                <p class="text-sm leading-snug tracking-wide text-gray-600">
-                  Cùng nhau khám phá những vùng đất mới, tạo nên những ký ức
-                  không thể nào quên.
-                </p>
-              </div>
-            </div>
-
-            <!-- Cột mốc 4 -->
-            <div
-              class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline"
-              data-aos="fade-left"
-            >
-              <div class="order-1 w-5/12"></div>
-              <div
-                class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
-              >
-                <h1 class="mx-auto text-white font-semibold text-lg">4</h1>
-              </div>
-              <div
-                class="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-              >
-                <img
-                  src="./assets/img/IMG_1129.jpeg"
-                  class="rounded-lg mb-3"
-                  alt="Kỉ niệm 200 ngày bên nhau"
-                />
-                <h3 class="font-bold text-gray-800 text-xl">
-                  Kỉ niệm 200 ngày bên nhau
-                </h3>
-                <p class="text-sm leading-snug tracking-wide text-gray-600">
-                  Một quãng thời gian đáng để trân trọng
-                </p>
-              </div>
-            </div>
-
-            <!-- Cột mốc 5 -->
-            <div
-              class="mb-8 flex justify-between items-center w-full right-timeline"
-              data-aos="fade-right"
-            >
-              <div class="order-1 w-5/12"></div>
-              <div
-                class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
-              >
-                <h1 class="mx-auto font-semibold text-lg text-white">5</h1>
-              </div>
-              <div
-                class="order-1 bg-pink-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-              >
-                <img
-                  src="./assets/img/giangSinh.jpeg"
-                  class="rounded-lg mb-3"
-                  alt="Giáng sinh"
-                />
-                <h3 class="font-bold text-pink-800 text-xl">
-                  25.12.2024 - Giáng Sinh Ấm Áp
-                </h3>
-                <p class="text-sm leading-snug tracking-wide text-gray-600">
-                  Giáng sinh đầu tiên của chúng ta, không cần quà cáp, chỉ cần
-                  có nhau là đủ.
-                </p>
-              </div>
-            </div>
-
-            <!-- Cột mốc 6 -->
-            <div
-              class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline"
-              data-aos="fade-left"
-            >
-              <div class="order-1 w-5/12"></div>
-              <div
-                class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
-              >
-                <h1 class="mx-auto text-white font-semibold text-lg">6</h1>
-              </div>
-              <div
-                class="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-              >
-                <img
-                  src="./assets/img/namMoi.jpeg"
-                  class="rounded-lg mb-3"
-                  alt="Năm mới"
-                />
-                <h3 class="font-bold text-gray-800 text-xl">
-                  01.01.2025 - Đón Năm Mới
-                </h3>
-                <p class="text-sm leading-snug tracking-wide text-gray-600">
-                  Cùng nhau đếm ngược và trao những lời chúc tốt đẹp nhất cho
-                  một năm sắp tới.
-                </p>
-              </div>
-            </div>
-
-            <!-- Cột mốc 7 -->
-            <div
-              class="mb-8 flex justify-between items-center w-full right-timeline"
-              data-aos="fade-right"
-            >
-              <div class="order-1 w-5/12"></div>
-              <div
-                class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
-              >
-                <h1 class="mx-auto font-semibold text-lg text-white">7</h1>
-              </div>
-              <div
-                class="order-1 bg-pink-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-              >
-                <img
-                  src="./assets/img/Valentine.jpeg"
-                  class="rounded-lg mb-3"
-                  alt="Valentine"
-                />
-                <h3 class="font-bold text-pink-800 text-xl">
-                  14.02.2025 - Valentine Ngọt Ngào
-                </h3>
-                <p class="text-sm leading-snug tracking-wide text-gray-600">
-                  Ngày nào có em cũng là Valentine, nhưng ngày này thì phải đặc
-                  biệt hơn một chút!
-                </p>
-              </div>
-            </div>
-
-            <!-- Cột mốc 8 -->
-            <div
-              class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline"
-              data-aos="fade-left"
-            >
-              <div class="order-1 w-5/12"></div>
-              <div
-                class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
-              >
-                <h1 class="mx-auto text-white font-semibold text-lg">8</h1>
-              </div>
-              <div
-                class="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-              >
-                <img
-                  src="./assets/img/IMG_20250817_205337.jpg"
-                  class="rounded-lg mb-3"
-                  alt="8/3"
-                />
-                <h3 class="font-bold text-gray-800 text-xl">
-                  02.09.2025 - Quốc khánh
-                </h3>
-                <p class="text-sm leading-snug tracking-wide text-gray-600">
-                  Luôn mong em được yêu thương không chỉ trong một ngày, mà là
-                  cả cuộc đời.
-                </p>
-              </div>
-            </div>
-
-            <!-- Cột mốc 9 -->
-            <div
-              class="mb-8 flex justify-between items-center w-full right-timeline"
-              data-aos="fade-right"
-            >
-              <div class="order-1 w-5/12"></div>
-              <div
-                class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
-              >
-                <h1 class="mx-auto font-semibold text-lg text-white">9</h1>
-              </div>
-              <div
-                class="order-1 bg-pink-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-              >
-                <img
-                  src="./assets/img/kỉliem.jpg"
-                  class="rounded-lg mb-3"
-                  alt="Kỷ niệm 1 năm"
-                />
-                <h3 class="font-bold text-pink-800 text-xl">
-                  29.04.2025 - Kỷ niệm 1 năm
-                </h3>
-                <p class="text-sm leading-snug tracking-wide text-gray-600">
-                  365 ngày yêu thương, và hành trình của chúng ta chỉ mới bắt
-                  đầu.
-                </p>
-              </div>
-            </div>
-
-            <!-- Cột mốc 10 -->
-            <div
-              class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline"
-              data-aos="fade-left"
-            >
-              <div class="order-1 w-5/12"></div>
-              <div
-                class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
-              >
-                <h1 class="mx-auto text-white font-semibold text-lg">10</h1>
-              </div>
-              <div
-                class="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-              >
-                <img
-                  src="./assets/img/cheoThuyen.jpg"
-                  class="rounded-lg mb-3"
-                  alt="Mùa hè"
-                />
-                <h3 class="font-bold text-gray-800 text-xl">
-                  Mùa Hè 2025 - Rực Rỡ
-                </h3>
-                <p class="text-sm leading-snug tracking-wide text-gray-600">
-                  Những chuyến đi, những buổi chiều lộng gió, mùa hè có em thật
-                  tuyệt.
-                </p>
-              </div>
-            </div>
-
-            <!-- Cột mốc 11 -->
-            <div
-              class="mb-8 flex justify-between items-center w-full right-timeline"
-              data-aos="fade-right"
-            >
-              <div class="order-1 w-5/12"></div>
-              <div
-                class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
-              >
-                <h1 class="mx-auto font-semibold text-lg text-white">11</h1>
-              </div>
-              <div
-                class="order-1 bg-pink-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-              >
-                <img
-                  src="./assets/img/Luoi.jpg"
-                  class="rounded-lg mb-3"
-                  alt="Ngày mưa"
-                />
-                <h3 class="font-bold text-pink-800 text-xl">
-                  Một Ngày Mưa Lười Biếng
-                </h3>
-                <p class="text-sm leading-snug tracking-wide text-gray-600">
-                  Chỉ cần cùng nhau ở nhà, xem một bộ phim hay cũng đủ thấy hạnh
-                  phúc.
-                </p>
-              </div>
-            </div>
-
-            <!-- Cột mốc 12 -->
-            <div
-              class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline"
-              data-aos="fade-left"
-            >
-              <div class="order-1 w-5/12"></div>
-              <div
-                class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
-              >
-                <h1 class="mx-auto text-white font-semibold text-lg">12</h1>
-              </div>
-              <div
-                class="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-              >
-                <img
-                  src="./assets/img/dep.jpg"
-                  class="rounded-lg mb-3"
-                  alt="Nấu ăn"
-                />
-                <h3 class="font-bold text-gray-800 text-xl">Đẹp quá</h3>
-                <p class="text-sm leading-snug tracking-wide text-gray-600">
-                  Anh thấy đẹp nên cho vào.
-                </p>
-              </div>
-            </div>
-
-            <!-- Cột mốc 13 -->
-            <div
-              class="mb-8 flex justify-between items-center w-full right-timeline"
-              data-aos="fade-right"
-            >
-              <div class="order-1 w-5/12"></div>
-              <div
-                class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
-              >
-                <h1 class="mx-auto font-semibold text-lg text-white">❤️</h1>
-              </div>
-              <div
-                class="order-1 bg-pink-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-              >
-                <img
-                  src="./assets/img/IMG_20241203_115705.jpg"
-                  class="rounded-lg mb-3"
-                  alt="Hiện tại"
-                />
-                <h3 class="font-bold text-pink-800 text-xl">Và Hiện Tại...</h3>
-                <p class="text-sm leading-snug tracking-wide text-gray-600">
-                  Yêu em hơn bao giờ hết, và câu chuyện này vẫn còn được viết
-                  tiếp...
-                </p>
-              </div>
-            </div>
+              Khám phá ngay!
+            </a>
           </div>
-        </div>
-      </section>
+        </header>
 
-      <!-- Phần 3: 10 Điều Anh Yêu Ở Em -->
-      <section id="reasons" class="py-20 px-4">
-        <div class="container mx-auto text-center">
-          <h2
-            class="font-handwriting text-4xl md:text-6xl mb-12 text-pink-600"
-            data-aos="fade-up"
-            data-aos-anchor-placement="top-bottom"
-          >
-            Vì Sao Trái Tim Anh Lại Loạn Nhịp?
-          </h2>
-          <div
-            class="max-w-4xl mx-auto text-left grid md:grid-cols-2 gap-x-12 gap-y-6"
-          >
-            <!-- Thay thế nội dung các điều ở đây -->
-            <div class="flex items-start space-x-3" data-aos="zoom-in-right">
-              <span class="text-pink-500 mt-1">❤️</span>
-              <p>Nụ cười của em tỏa nắng hơn cả mùa hạ.</p>
-            </div>
-            <div class="flex items-start space-x-3" data-aos="zoom-in-left">
-              <span class="text-pink-500 mt-1">❤️</span>
-              <p>Cách em quan tâm đến mọi người xung quanh.</p>
-            </div>
-            <div class="flex items-start space-x-3" data-aos="zoom-in-right">
-              <span class="text-pink-500 mt-1">❤️</span>
-              <p>Sự thông minh và dí dỏm trong mỗi câu chuyện.</p>
-            </div>
-            <div class="flex items-start space-x-3" data-aos="zoom-in-left">
-              <span class="text-pink-500 mt-1">❤️</span>
-              <p>Ánh mắt của em, nơi chứa đựng cả một bầu trời dịu dàng.</p>
-            </div>
-            <div class="flex items-start space-x-3" data-aos="zoom-in-right">
-              <span class="text-pink-500 mt-1">❤️</span>
-              <p>Khi em say sưa kể về một điều em thích.</p>
-            </div>
-            <div class="flex items-start space-x-3" data-aos="zoom-in-left">
-              <span class="text-pink-500 mt-1">❤️</span>
-              <p>Em luôn là chính mình, mạnh mẽ và độc lập.</p>
-            </div>
-            <div class="flex items-start space-x-3" data-aos="zoom-in-right">
-              <span class="text-pink-500 mt-1">❤️</span>
-              <p>Cách em kiên nhẫn lắng nghe anh nói.</p>
-            </div>
-            <div class="flex items-start space-x-3" data-aos="zoom-in-left">
-              <span class="text-pink-500 mt-1">❤️</span>
-              <p>Khi em nấu những món ăn ngon tuyệt.</p>
-            </div>
-            <div class="flex items-start space-x-3" data-aos="zoom-in-right">
-              <span class="text-pink-500 mt-1">❤️</span>
-              <p>Ở bên em, anh luôn cảm thấy bình yên.</p>
-            </div>
-            <div class="flex items-start space-x-3" data-aos="zoom-in-left">
-              <span class="text-pink-500 mt-1">❤️</span>
-              <p>Vì em đơn giản là chính em, người con gái anh yêu.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+        <main>
+          <!-- Phần 2: Câu Chuyện Của Chúng Ta -->
+          <section id="story" class="py-20 px-4 bg-white">
+            <div class="container mx-auto">
+              <h2
+                class="font-handwriting text-center text-4xl md:text-6xl mb-12 text-pink-600"
+              >
+                TimeLine Tình Yêu
+              </h2>
+              <div class="relative max-w-4xl mx-auto">
+                <!-- Đường kẻ dọc của timeline -->
+                <div
+                  class="absolute left-1/2 w-1 bg-pink-200 h-full transform -translate-x-1/2"
+                ></div>
 
-      
-       <!-- Phần 4: Khoảnh Khắc Đáng Nhớ -->
-      <section id="gallery" class="py-20 px-4 bg-white">
-        <div class="container mx-auto text-center">
-          <h2
-            class="font-handwriting text-4xl md:text-6xl mb-6 text-pink-600"
-            data-aos="fade-down"
-          >
-            Kho Báu Của Anh
-          </h2>
-          <p class="max-w-2xl mx-auto mb-10 text-gray-600">Click vào mỗi hộp quà để khám phá điều bất ngờ bên trong nhé!</p>
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
-            <!-- Card 1 -->
-            <div class="flip-card" data-aos="zoom-in">
-                <div class="flip-card-inner">
+                <!-- Cột mốc 1 -->
+                <div
+                  class="mb-8 flex justify-between items-center w-full right-timeline"
+                  data-aos="fade-right"
+                >
+                  <div class="order-1 w-5/12"></div>
+                  <div
+                    class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
+                  >
+                    <h1 class="mx-auto font-semibold text-lg text-white">1</h1>
+                  </div>
+                  <div
+                    class="order-1 bg-pink-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
+                  >
+                    <img
+                      src="./assets/img/IMG_0044.jpg"
+                      class="rounded-lg mb-3"
+                      alt="Buổi hẹn đầu tiên"
+                    />
+                    <h3 class="font-bold text-pink-800 text-xl">
+                      Buổi hẹn đầu tiên
+                    </h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">
+                      Ngày định mệnh đã mang em đến bên anh, một ngày mà anh sẽ
+                      không bao giờ quên.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Cột mốc 2 -->
+                <div
+                  class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline"
+                  data-aos="fade-left"
+                >
+                  <div class="order-1 w-5/12"></div>
+                  <div
+                    class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
+                  >
+                    <h1 class="mx-auto text-white font-semibold text-lg">2</h1>
+                  </div>
+                  <div
+                    class="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
+                  >
+                    <img
+                      src="./assets/img/IMG_0974.jpg"
+                      class="rounded-lg mb-3"
+                      alt="Buổi hẹn thứ 2"
+                    />
+                    <h3 class="font-bold text-gray-800 text-xl">Buổi hẹn thứ 2</h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">
+                      Buổi tối hôm ấy, anh biết mình đã 'say' em thật rồi. Nụ cười
+                      của em làm bừng sáng cả thế giới.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Cột mốc 3 -->
+                <div
+                  class="mb-8 flex justify-between items-center w-full right-timeline"
+                  data-aos="fade-right"
+                >
+                  <div class="order-1 w-5/12"></div>
+                  <div
+                    class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
+                  >
+                    <h1 class="mx-auto font-semibold text-lg text-white">3</h1>
+                  </div>
+                  <div
+                    class="order-1 bg-pink-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
+                  >
+                    <img
+                      src="./assets/img/1I2OVIHRO_4RF6IB.jpg"
+                      class="rounded-lg mb-3"
+                      alt="Chuyến đi chơi"
+                    />
+                    <h3 class="font-bold text-pink-800 text-xl">
+                      Chuyến đi xa đầu tiên
+                    </h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">
+                      Cùng nhau khám phá những vùng đất mới, tạo nên những ký ức
+                      không thể nào quên.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Cột mốc 4 -->
+                <div
+                  class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline"
+                  data-aos="fade-left"
+                >
+                  <div class="order-1 w-5/12"></div>
+                  <div
+                    class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
+                  >
+                    <h1 class="mx-auto text-white font-semibold text-lg">4</h1>
+                  </div>
+                  <div
+                    class="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
+                  >
+                    <img
+                      src="./assets/img/IMG_1129.jpeg"
+                      class="rounded-lg mb-3"
+                      alt="Kỉ niệm 200 ngày bên nhau"
+                    />
+                    <h3 class="font-bold text-gray-800 text-xl">
+                      Kỉ niệm 200 ngày bên nhau
+                    </h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">
+                      Một quãng thời gian đáng để trân trọng
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Cột mốc 5 -->
+                <div
+                  class="mb-8 flex justify-between items-center w-full right-timeline"
+                  data-aos="fade-right"
+                >
+                  <div class="order-1 w-5/12"></div>
+                  <div
+                    class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
+                  >
+                    <h1 class="mx-auto font-semibold text-lg text-white">5</h1>
+                  </div>
+                  <div
+                    class="order-1 bg-pink-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
+                  >
+                    <img
+                      src="./assets/img/giangSinh.jpeg"
+                      class="rounded-lg mb-3"
+                      alt="Giáng sinh"
+                    />
+                    <h3 class="font-bold text-pink-800 text-xl">
+                      25.12.2024 - Giáng Sinh Ấm Áp
+                    </h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">
+                      Giáng sinh đầu tiên của chúng ta, không cần quà cáp, chỉ cần
+                      có nhau là đủ.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Cột mốc 6 -->
+                <div
+                  class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline"
+                  data-aos="fade-left"
+                >
+                  <div class="order-1 w-5/12"></div>
+                  <div
+                    class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
+                  >
+                    <h1 class="mx-auto text-white font-semibold text-lg">6</h1>
+                  </div>
+                  <div
+                    class="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
+                  >
+                    <img
+                      src="./assets/img/namMoi.jpeg"
+                      class="rounded-lg mb-3"
+                      alt="Năm mới"
+                    />
+                    <h3 class="font-bold text-gray-800 text-xl">
+                      01.01.2025 - Đón Năm Mới
+                    </h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">
+                      Cùng nhau đếm ngược và trao những lời chúc tốt đẹp nhất cho
+                      một năm sắp tới.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Cột mốc 7 -->
+                <div
+                  class="mb-8 flex justify-between items-center w-full right-timeline"
+                  data-aos="fade-right"
+                >
+                  <div class="order-1 w-5/12"></div>
+                  <div
+                    class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
+                  >
+                    <h1 class="mx-auto font-semibold text-lg text-white">7</h1>
+                  </div>
+                  <div
+                    class="order-1 bg-pink-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
+                  >
+                    <img
+                      src="./assets/img/Valentine.jpeg"
+                      class="rounded-lg mb-3"
+                      alt="Valentine"
+                    />
+                    <h3 class="font-bold text-pink-800 text-xl">
+                      14.02.2025 - Valentine Ngọt Ngào
+                    </h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">
+                      Ngày nào có em cũng là Valentine, nhưng ngày này thì phải đặc
+                      biệt hơn một chút!
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Cột mốc 8 -->
+                <div
+                  class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline"
+                  data-aos="fade-left"
+                >
+                  <div class="order-1 w-5/12"></div>
+                  <div
+                    class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
+                  >
+                    <h1 class="mx-auto text-white font-semibold text-lg">8</h1>
+                  </div>
+                  <div
+                    class="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
+                  >
+                    <img
+                      src="./assets/img/IMG_20250817_205337.jpg"
+                      class="rounded-lg mb-3"
+                      alt="8/3"
+                    />
+                    <h3 class="font-bold text-gray-800 text-xl">
+                      02.09.2025 - Quốc khánh
+                    </h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">
+                      Luôn mong em được yêu thương không chỉ trong một ngày, mà là
+                      cả cuộc đời.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Cột mốc 9 -->
+                <div
+                  class="mb-8 flex justify-between items-center w-full right-timeline"
+                  data-aos="fade-right"
+                >
+                  <div class="order-1 w-5/12"></div>
+                  <div
+                    class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
+                  >
+                    <h1 class="mx-auto font-semibold text-lg text-white">9</h1>
+                  </div>
+                  <div
+                    class="order-1 bg-pink-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
+                  >
+                    <img
+                      src="./assets/img/kỉliem.jpg"
+                      class="rounded-lg mb-3"
+                      alt="Kỷ niệm 1 năm"
+                    />
+                    <h3 class="font-bold text-pink-800 text-xl">
+                      29.04.2025 - Kỷ niệm 1 năm
+                    </h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">
+                      365 ngày yêu thương, và hành trình của chúng ta chỉ mới bắt
+                      đầu.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Cột mốc 10 -->
+                <div
+                  class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline"
+                  data-aos="fade-left"
+                >
+                  <div class="order-1 w-5/12"></div>
+                  <div
+                    class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
+                  >
+                    <h1 class="mx-auto text-white font-semibold text-lg">10</h1>
+                  </div>
+                  <div
+                    class="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
+                  >
+                    <img
+                      src="./assets/img/cheoThuyen.jpg"
+                      class="rounded-lg mb-3"
+                      alt="Mùa hè"
+                    />
+                    <h3 class="font-bold text-gray-800 text-xl">
+                      Mùa Hè 2025 - Rực Rỡ
+                    </h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">
+                      Những chuyến đi, những buổi chiều lộng gió, mùa hè có em thật
+                      tuyệt.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Cột mốc 11 -->
+                <div
+                  class="mb-8 flex justify-between items-center w-full right-timeline"
+                  data-aos="fade-right"
+                >
+                  <div class="order-1 w-5/12"></div>
+                  <div
+                    class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
+                  >
+                    <h1 class="mx-auto font-semibold text-lg text-white">11</h1>
+                  </div>
+                  <div
+                    class="order-1 bg-pink-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
+                  >
+                    <img
+                      src="./assets/img/Luoi.jpg"
+                      class="rounded-lg mb-3"
+                      alt="Ngày mưa"
+                    />
+                    <h3 class="font-bold text-pink-800 text-xl">
+                      Một Ngày Mưa Lười Biếng
+                    </h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">
+                      Chỉ cần cùng nhau ở nhà, xem một bộ phim hay cũng đủ thấy hạnh
+                      phúc.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Cột mốc 12 -->
+                <div
+                  class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline"
+                  data-aos="fade-left"
+                >
+                  <div class="order-1 w-5/12"></div>
+                  <div
+                    class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
+                  >
+                    <h1 class="mx-auto text-white font-semibold text-lg">12</h1>
+                  </div>
+                  <div
+                    class="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
+                  >
+                    <img
+                      src="./assets/img/dep.jpg"
+                      class="rounded-lg mb-3"
+                      alt="Nấu ăn"
+                    />
+                    <h3 class="font-bold text-gray-800 text-xl">Đẹp quá</h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">
+                      Anh thấy đẹp nên cho vào.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Cột mốc 13 -->
+                <div
+                  class="mb-8 flex justify-between items-center w-full right-timeline"
+                  data-aos="fade-right"
+                >
+                  <div class="order-1 w-5/12"></div>
+                  <div
+                    class="z-20 flex items-center order-1 bg-pink-500 shadow-xl w-8 h-8 rounded-full"
+                  >
+                    <h1 class="mx-auto font-semibold text-lg text-white">❤️</h1>
+                  </div>
+                  <div
+                    class="order-1 bg-pink-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
+                  >
+                    <img
+                      src="./assets/img/IMG_20241203_115705.jpg"
+                      class="rounded-lg mb-3"
+                      alt="Hiện tại"
+                    />
+                    <h3 class="font-bold text-pink-800 text-xl">Và Hiện Tại...</h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">
+                      Yêu em hơn bao giờ hết, và câu chuyện này vẫn còn được viết
+                      tiếp...
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Phần 3: 10 Điều Anh Yêu Ở Em -->
+          <section id="reasons" class="py-20 px-4">
+            <div class="container mx-auto text-center">
+              <h2
+                class="font-handwriting text-4xl md:text-6xl mb-12 text-pink-600"
+                data-aos="fade-up"
+                data-aos-anchor-placement="top-bottom"
+              >
+                Vì Sao Trái Tim Anh Lại Loạn Nhịp?
+              </h2>
+              <div
+                class="max-w-4xl mx-auto text-left grid md:grid-cols-2 gap-x-12 gap-y-6"
+              >
+                <!-- Thay thế nội dung các điều ở đây -->
+                <div class="flex items-start space-x-3" data-aos="zoom-in-right">
+                  <span class="text-pink-500 mt-1">❤️</span>
+                  <p>Nụ cười của em tỏa nắng hơn cả mùa hạ.</p>
+                </div>
+                <div class="flex items-start space-x-3" data-aos="zoom-in-left">
+                  <span class="text-pink-500 mt-1">❤️</span>
+                  <p>Cách em quan tâm đến mọi người xung quanh.</p>
+                </div>
+                <div class="flex items-start space-x-3" data-aos="zoom-in-right">
+                  <span class="text-pink-500 mt-1">❤️</span>
+                  <p>Sự thông minh và dí dỏm trong mỗi câu chuyện.</p>
+                </div>
+                <div class="flex items-start space-x-3" data-aos="zoom-in-left">
+                  <span class="text-pink-500 mt-1">❤️</span>
+                  <p>Ánh mắt của em, nơi chứa đựng cả một bầu trời dịu dàng.</p>
+                </div>
+                <div class="flex items-start space-x-3" data-aos="zoom-in-right">
+                  <span class="text-pink-500 mt-1">❤️</span>
+                  <p>Khi em say sưa kể về một điều em thích.</p>
+                </div>
+                <div class="flex items-start space-x-3" data-aos="zoom-in-left">
+                  <span class="text-pink-500 mt-1">❤️</span>
+                  <p>Em luôn là chính mình, mạnh mẽ và độc lập.</p>
+                </div>
+                <div class="flex items-start space-x-3" data-aos="zoom-in-right">
+                  <span class="text-pink-500 mt-1">❤️</span>
+                  <p>Cách em kiên nhẫn lắng nghe anh nói.</p>
+                </div>
+                <div class="flex items-start space-x-3" data-aos="zoom-in-left">
+                  <span class="text-pink-500 mt-1">❤️</span>
+                  <p>Khi em nấu những món ăn ngon tuyệt.</p>
+                </div>
+                <div class="flex items-start space-x-3" data-aos="zoom-in-right">
+                  <span class="text-pink-500 mt-1">❤️</span>
+                  <p>Ở bên em, anh luôn cảm thấy bình yên.</p>
+                </div>
+                <div class="flex items-start space-x-3" data-aos="zoom-in-left">
+                  <span class="text-pink-500 mt-1">❤️</span>
+                  <p>Vì em đơn giản là chính em, người con gái anh yêu.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Phần 4: Khoảnh Khắc Đáng Nhớ -->
+          <section id="gallery" class="py-20 px-4 bg-white">
+            <div class="container mx-auto text-center">
+              <h2
+                class="font-handwriting text-4xl md:text-6xl mb-6 text-pink-600"
+                data-aos="fade-down"
+              >
+                Kho Báu Của Anh
+              </h2>
+              <p class="max-w-2xl mx-auto mb-10 text-gray-600">
+                Click vào mỗi hộp quà để khám phá điều bất ngờ bên trong nhé!
+              </p>
+              <div
+                class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto"
+              >
+                <!-- Card 1 -->
+                <div class="flip-card" data-aos="zoom-in">
+                  <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-gift-fill" viewBox="0 0 16 16"><path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v1.086c.938.121 1.63.398 2.064.745.433.347.732.754.732 1.17v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H11v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H8.5v2.857a.5.5 0 0 1-1 0V13.5H6c-.528 0-.993-.077-1.382-.21a2.5 2.5 0 0 1-1.443-1.254A1.99 1.99 0 0 1 3 11.443V10H1.5a.5.5 0 0 1 0-1H3V7.547c0-.35.08-.66.23-.913a2.5 2.5 0 0 1 1.443-1.254c.389-.133.854-.21 1.382-.21H7V3.586a2.5 2.5 0 0 1-4 0zM8 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="48"
+                        height="48"
+                        fill="currentColor"
+                        class="bi bi-gift-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v1.086c.938.121 1.63.398 2.064.745.433.347.732.754.732 1.17v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H11v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H8.5v2.857a.5.5 0 0 1-1 0V13.5H6c-.528 0-.993-.077-1.382-.21a2.5 2.5 0 0 1-1.443-1.254A1.99 1.99 0 0 1 3 11.443V10H1.5a.5.5 0 0 1 0-1H3V7.547c0-.35.08-.66.23-.913a2.5 2.5 0 0 1 1.443-1.254c.389-.133.854-.21 1.382-.21H7V3.586a2.5 2.5 0 0 1-4 0zM8 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"
+                        />
+                      </svg>
                     </div>
                     <div class="flip-card-back">
-                        <img src="./assets/img/em1.jpg" alt="Kỷ niệm 1"/>
+                      <img src="./assets/img/em1.jpg" alt="Kỷ niệm 1" />
                     </div>
+                  </div>
                 </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="flip-card" data-aos="zoom-in" data-aos-delay="100">
-                <div class="flip-card-inner">
+                <!-- Card 2 -->
+                <div class="flip-card" data-aos="zoom-in" data-aos-delay="100">
+                  <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-gift-fill" viewBox="0 0 16 16"><path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v1.086c.938.121 1.63.398 2.064.745.433.347.732.754.732 1.17v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H11v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H8.5v2.857a.5.5 0 0 1-1 0V13.5H6c-.528 0-.993-.077-1.382-.21a2.5 2.5 0 0 1-1.443-1.254A1.99 1.99 0 0 1 3 11.443V10H1.5a.5.5 0 0 1 0-1H3V7.547c0-.35.08-.66.23-.913a2.5 2.5 0 0 1 1.443-1.254c.389-.133.854-.21 1.382-.21H7V3.586a2.5 2.5 0 0 1-4 0zM8 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="48"
+                        height="48"
+                        fill="currentColor"
+                        class="bi bi-gift-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v1.086c.938.121 1.63.398 2.064.745.433.347.732.754.732 1.17v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H11v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H8.5v2.857a.5.5 0 0 1-1 0V13.5H6c-.528 0-.993-.077-1.382-.21a2.5 2.5 0 0 1-1.443-1.254A1.99 1.99 0 0 1 3 11.443V10H1.5a.5.5 0 0 1 0-1H3V7.547c0-.35.08-.66.23-.913a2.5 2.5 0 0 1 1.443-1.254c.389-.133.854-.21 1.382-.21H7V3.586a2.5 2.5 0 0 1-4 0zM8 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"
+                        />
+                      </svg>
                     </div>
                     <div class="flip-card-back">
-                        <img src="./assets/img/em2.jpg" alt="Kỷ niệm 2"/>
+                      <img src="./assets/img/em2.jpg" alt="Kỷ niệm 2" />
                     </div>
+                  </div>
                 </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="flip-card" data-aos="zoom-in" data-aos-delay="200">
-                <div class="flip-card-inner">
+                <!-- Card 3 -->
+                <div class="flip-card" data-aos="zoom-in" data-aos-delay="200">
+                  <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-gift-fill" viewBox="0 0 16 16"><path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v1.086c.938.121 1.63.398 2.064.745.433.347.732.754.732 1.17v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H11v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H8.5v2.857a.5.5 0 0 1-1 0V13.5H6c-.528 0-.993-.077-1.382-.21a2.5 2.5 0 0 1-1.443-1.254A1.99 1.99 0 0 1 3 11.443V10H1.5a.5.5 0 0 1 0-1H3V7.547c0-.35.08-.66.23-.913a2.5 2.5 0 0 1 1.443-1.254c.389-.133.854-.21 1.382-.21H7V3.586a2.5 2.5 0 0 1-4 0zM8 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="48"
+                        height="48"
+                        fill="currentColor"
+                        class="bi bi-gift-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v1.086c.938.121 1.63.398 2.064.745.433.347.732.754.732 1.17v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H11v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H8.5v2.857a.5.5 0 0 1-1 0V13.5H6c-.528 0-.993-.077-1.382-.21a2.5 2.5 0 0 1-1.443-1.254A1.99 1.99 0 0 1 3 11.443V10H1.5a.5.5 0 0 1 0-1H3V7.547c0-.35.08-.66.23-.913a2.5 2.5 0 0 1 1.443-1.254c.389-.133.854-.21 1.382-.21H7V3.586a2.5 2.5 0 0 1-4 0zM8 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"
+                        />
+                      </svg>
                     </div>
                     <div class="flip-card-back">
-                        <img src="./assets/img/em3.jpg" alt="Kỷ niệm 3"/>
+                      <img src="./assets/img/em3.jpg" alt="Kỷ niệm 3" />
                     </div>
+                  </div>
                 </div>
-            </div>
-            <!-- Card 4 -->
-            <div class="flip-card" data-aos="zoom-in" data-aos-delay="0">
-                <div class="flip-card-inner">
+                <!-- Card 4 -->
+                <div class="flip-card" data-aos="zoom-in" data-aos-delay="0">
+                  <div class="flip-card-inner">
                     <div class="flip-card-front">
-                       <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-gift-fill" viewBox="0 0 16 16"><path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v1.086c.938.121 1.63.398 2.064.745.433.347.732.754.732 1.17v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H11v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H8.5v2.857a.5.5 0 0 1-1 0V13.5H6c-.528 0-.993-.077-1.382-.21a2.5 2.5 0 0 1-1.443-1.254A1.99 1.99 0 0 1 3 11.443V10H1.5a.5.5 0 0 1 0-1H3V7.547c0-.35.08-.66.23-.913a2.5 2.5 0 0 1 1.443-1.254c.389-.133.854-.21 1.382-.21H7V3.586a2.5 2.5 0 0 1-4 0zM8 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="48"
+                        height="48"
+                        fill="currentColor"
+                        class="bi bi-gift-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v1.086c.938.121 1.63.398 2.064.745.433.347.732.754.732 1.17v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H11v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H8.5v2.857a.5.5 0 0 1-1 0V13.5H6c-.528 0-.993-.077-1.382-.21a2.5 2.5 0 0 1-1.443-1.254A1.99 1.99 0 0 1 3 11.443V10H1.5a.5.5 0 0 1 0-1H3V7.547c0-.35.08-.66.23-.913a2.5 2.5 0 0 1 1.443-1.254c.389-.133.854-.21 1.382-.21H7V3.586a2.5 2.5 0 0 1-4 0zM8 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"
+                        />
+                      </svg>
                     </div>
                     <div class="flip-card-back">
-                        <img src="./assets/img/em4.jpg" alt="Kỷ niệm 4"/>
+                      <img src="./assets/img/em4.jpg" alt="Kỷ niệm 4" />
                     </div>
+                  </div>
                 </div>
-            </div>
-            <!-- Card 5 -->
-            <div class="flip-card" data-aos="zoom-in" data-aos-delay="100">
-                <div class="flip-card-inner">
+                <!-- Card 5 -->
+                <div class="flip-card" data-aos="zoom-in" data-aos-delay="100">
+                  <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-gift-fill" viewBox="0 0 16 16"><path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v1.086c.938.121 1.63.398 2.064.745.433.347.732.754.732 1.17v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H11v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H8.5v2.857a.5.5 0 0 1-1 0V13.5H6c-.528 0-.993-.077-1.382-.21a2.5 2.5 0 0 1-1.443-1.254A1.99 1.99 0 0 1 3 11.443V10H1.5a.5.5 0 0 1 0-1H3V7.547c0-.35.08-.66.23-.913a2.5 2.5 0 0 1 1.443-1.254c.389-.133.854-.21 1.382-.21H7V3.586a2.5 2.5 0 0 1-4 0zM8 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="48"
+                        height="48"
+                        fill="currentColor"
+                        class="bi bi-gift-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v1.086c.938.121 1.63.398 2.064.745.433.347.732.754.732 1.17v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H11v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H8.5v2.857a.5.5 0 0 1-1 0V13.5H6c-.528 0-.993-.077-1.382-.21a2.5 2.5 0 0 1-1.443-1.254A1.99 1.99 0 0 1 3 11.443V10H1.5a.5.5 0 0 1 0-1H3V7.547c0-.35.08-.66.23-.913a2.5 2.5 0 0 1 1.443-1.254c.389-.133.854-.21 1.382-.21H7V3.586a2.5 2.5 0 0 1-4 0zM8 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"
+                        />
+                      </svg>
                     </div>
                     <div class="flip-card-back">
-                        <img src="./assets/img/em5.jpg" alt="Kỷ niệm 5"/>
+                      <img src="./assets/img/em5.jpg" alt="Kỷ niệm 5" />
                     </div>
+                  </div>
                 </div>
-            </div>
-            <!-- Card 6 -->
-            <div class="flip-card" data-aos="zoom-in" data-aos-delay="200">
-                <div class="flip-card-inner">
+                <!-- Card 6 -->
+                <div class="flip-card" data-aos="zoom-in" data-aos-delay="200">
+                  <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-gift-fill" viewBox="0 0 16 16"><path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v1.086c.938.121 1.63.398 2.064.745.433.347.732.754.732 1.17v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H11v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H8.5v2.857a.5.5 0 0 1-1 0V13.5H6c-.528 0-.993-.077-1.382-.21a2.5 2.5 0 0 1-1.443-1.254A1.99 1.99 0 0 1 3 11.443V10H1.5a.5.5 0 0 1 0-1H3V7.547c0-.35.08-.66.23-.913a2.5 2.5 0 0 1 1.443-1.254c.389-.133.854-.21 1.382-.21H7V3.586a2.5 2.5 0 0 1-4 0zM8 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="48"
+                        height="48"
+                        fill="currentColor"
+                        class="bi bi-gift-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v1.086c.938.121 1.63.398 2.064.745.433.347.732.754.732 1.17v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H11v1.443c0 .35-.08.66-.23.913a2.5 2.5 0 0 1-1.443 1.254c-.389.133-.854.21-1.382.21H8.5v2.857a.5.5 0 0 1-1 0V13.5H6c-.528 0-.993-.077-1.382-.21a2.5 2.5 0 0 1-1.443-1.254A1.99 1.99 0 0 1 3 11.443V10H1.5a.5.5 0 0 1 0-1H3V7.547c0-.35.08-.66.23-.913a2.5 2.5 0 0 1 1.443-1.254c.389-.133.854-.21 1.382-.21H7V3.586a2.5 2.5 0 0 1-4 0zM8 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"
+                        />
+                      </svg>
                     </div>
                     <div class="flip-card-back">
-                        <img src="./assets/img/em6.jpg" alt="Kỷ niệm 6"/>
+                      <img src="./assets/img/em6.jpg" alt="Kỷ niệm 6" />
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
+          <!-- Phần 5: Playlist Nhạc -->
+          <section id="playlist" class="py-20 px-4">
+            <div class="container mx-auto text-center">
+              <h2
+                class="font-handwriting text-4xl md:text-6xl mb-4 text-pink-600"
+                data-aos="fade-down"
+              >
+                Giai Điệu Tình Yêu
+              </h2>
+              <p class="max-w-2xl mx-auto mb-8 text-gray-600" data-aos="fade-down">
+                Mỗi bài hát là một kỷ niệm. Cùng nghe nhé, bé iu!
+              </p>
+              <!-- Thay thế link src bằng link playlist YouTube của bạn -->
+              <div class="max-w-4xl mx-auto">
+                <video class="rounded-lg shadow-xl w-full" controls>
+                  <source
+                    src="./assets/Video/Vừa Hay Thức Giấc _ Phạm Kỳ ft. StillaD _ Official MV.mp4"
+                    type="video/mp4"
+                  />
+                  Trình duyệt của bạn không hỗ trợ thẻ video.
+                </video>
+              </div>
+            </div>
+          </section>
 
-      <!-- Phần 5: Playlist Nhạc -->
-      <section id="playlist" class="py-20 px-4">
-        <div class="container mx-auto text-center">
-          <h2
-            class="font-handwriting text-4xl md:text-6xl mb-4 text-pink-600"
-            data-aos="fade-down"
+          <!-- Phần 6: Món Quà Đặc Biệt -->
+          <section id="vouchers" class="py-20 px-4 bg-white">
+            <div class="container mx-auto text-center">
+              <h2
+                class="font-handwriting text-4xl md:text-6xl mb-12 text-pink-600"
+                data-aos="fade-down"
+              >
+                Phiếu Quà Tặng "Chỉ Dành Cho Em"
+              </h2>
+              <div class="flex flex-wrap justify-center gap-8">
+                <!-- Voucher 1 -->
+                <div
+                  class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm sm:w-80 border-l-8 border-pink-400 transform hover:-translate-y-2 transition-transform duration-300"
+                >
+                  <h3 class="font-bold text-lg text-pink-800">
+                    Voucher Bữa Tối Lãng Mạn
+                  </h3>
+                  <p class="text-gray-600 mt-2">
+                    Do chính tay "đầu bếp" tại gia thực hiện với tất cả tình yêu
+                    thương.
+                  </p>
+                </div>
+                <!-- Voucher 2 -->
+                <div
+                  class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm sm:w-80 border-l-8 border-yellow-400 transform hover:-translate-y-2 transition-transform duration-300"
+                >
+                  <h3 class="font-bold text-lg text-yellow-800">
+                    Voucher Miễn Giận Dỗi
+                  </h3>
+                  <p class="text-gray-600 mt-2">
+                    Có hiệu lực trong 24 giờ cho một lần "lỡ lời" bất kỳ. :)
+                  </p>
+                </div>
+                <!-- Voucher 3 -->
+                <div
+                  class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm sm:w-80 border-l-8 border-teal-400 transform hover:-translate-y-2 transition-transform duration-300"
+                >
+                  <h3 class="font-bold text-lg text-teal-800">
+                    Voucher Xem Phim Bất Tận
+                  </h3>
+                  <p class="text-gray-600 mt-2">
+                    Cùng nhau xem hết một series phim bất kỳ mà em lựa chọn, không
+                    phàn nàn.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Phần 7: Lời Nhắn Từ Trái Tim -->
+          <section
+            id="letter"
+            class="py-20 px-4 bg-cover bg-center"
+            style="background-image: url('./assets/img/dep.jpg')"
           >
-            Giai Điệu Tình Yêu
-          </h2>
-          <p class="max-w-2xl mx-auto mb-8 text-gray-600" data-aos="fade-down">
-            Mỗi bài hát là một kỷ niệm. Cùng nghe nhé, bé iu!
-          </p>
-          <!-- Thay thế link src bằng link playlist YouTube của bạn -->
-          <div class="max-w-4xl mx-auto">
-            <video class="rounded-lg shadow-xl w-full" controls>
-              <source
-                src="./assets/Video/Vừa Hay Thức Giấc _ Phạm Kỳ ft. StillaD _ Official MV.mp4"
-                type="video/mp4"
-              />
-              Trình duyệt của bạn không hỗ trợ thẻ video.
-            </video>
-          </div>
-        </div>
-      </section>
+            <div class="container mx-auto max-w-3xl">
+              <div class="bg-white bg-opacity-90 p-8 md:p-12 rounded-lg shadow-2xl">
+                <h2
+                  class="font-handwriting text-4xl md:text-5xl mb-6 text-gray-800"
+                >
+                  Em yêu,
+                </h2>
+                <!-- Thay thế nội dung thư ở đây -->
+                <div
+                  class="text-gray-700 space-y-4 text-lg"
+                  data-aos="zoom-in-left"
+                >
+                  <p>
+                    Hôm nay là một ngày thật đặc biệt, ngày để anh có thể bày tỏ hết
+                    những tình cảm mà đôi khi anh vụng về chưa thể nói hết. Cảm ơn
+                    em đã đến bên anh, mang theo tất cả những điều dịu dàng và tốt
+                    đẹp nhất.
+                  </p>
+                  <p>
+                    Cảm ơn em vì đã luôn là nguồn động lực, là nơi bình yên để anh
+                    tìm về sau những mệt mỏi. Mỗi khoảnh khắc ở bên em đều là một
+                    món quà vô giá. Anh mong rằng chúng ta sẽ cùng nhau tạo nên thật
+                    nhiều, thật nhiều những kỷ niệm đẹp hơn nữa.
+                  </p>
+                  <p>
+                    Chúc em một ngày 20/10 luôn xinh đẹp, hạnh phúc và rạng rỡ. Hãy
+                    luôn nhớ rằng, có một người luôn ở đây, yêu thương và trân trọng
+                    em hết mực.
+                  </p>
+                </div>
+                <div class="mt-8 text-right">
+                  <p class="font-handwriting text-3xl text-gray-800">
+                    Yêu bé của anh rất nhiều,
+                  </p>
+                  <p class="font-handwriting text-3xl text-pink-600">Quang Minh</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
 
-      <!-- Phần 6: Món Quà Đặc Biệt -->
-      <section id="vouchers" class="py-20 px-4 bg-white">
-        <div class="container mx-auto text-center">
-          <h2
-            class="font-handwriting text-4xl md:text-6xl mb-12 text-pink-600"
-            data-aos="fade-down"
-          >
-            Phiếu Quà Tặng "Chỉ Dành Cho Em"
-          </h2>
-          <div class="flex flex-wrap justify-center gap-8">
-            <!-- Voucher 1 -->
-            <div
-              class="bg-white p-6 rounded-lg shadow-lg w-80 border-l-8 border-pink-400 transform hover:-translate-y-2 transition-transform duration-300"
-            >
-              <h3 class="font-bold text-lg text-pink-800">
-                Voucher Bữa Tối Lãng Mạn
-              </h3>
-              <p class="text-gray-600 mt-2">
-                Do chính tay "đầu bếp" tại gia thực hiện với tất cả tình yêu
-                thương.
-              </p>
-            </div>
-            <!-- Voucher 2 -->
-            <div
-              class="bg-white p-6 rounded-lg shadow-lg w-80 border-l-8 border-yellow-400 transform hover:-translate-y-2 transition-transform duration-300"
-            >
-              <h3 class="font-bold text-lg text-yellow-800">
-                Voucher Miễn Giận Dỗi
-              </h3>
-              <p class="text-gray-600 mt-2">
-                Có hiệu lực trong 24 giờ cho một lần "lỡ lời" bất kỳ. :)
-              </p>
-            </div>
-            <!-- Voucher 3 -->
-            <div
-              class="bg-white p-6 rounded-lg shadow-lg w-80 border-l-8 border-teal-400 transform hover:-translate-y-2 transition-transform duration-300"
-            >
-              <h3 class="font-bold text-lg text-teal-800">
-                Voucher Xem Phim Bất Tận
-              </h3>
-              <p class="text-gray-600 mt-2">
-                Cùng nhau xem hết một series phim bất kỳ mà em lựa chọn, không
-                phàn nàn.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      
-      <section
-        id="letter"
-        class="py-20 px-4 bg-cover bg-center"
-        style="background-image: url('./assets/img/dep.jpg')"
-      >
-        <div class="container mx-auto max-w-3xl">
-          <div class="bg-white bg-opacity-90 p-8 md:p-12 rounded-lg shadow-2xl">
-            <h2
-              class="font-handwriting text-4xl md:text-5xl mb-6 text-gray-800"
-            >
-              Em yêu,
-            </h2>
-            <!-- Thay thế nội dung thư ở đây -->
-            <div
-              class="text-gray-700 space-y-4 text-lg"
-              data-aos="zoom-in-left"
-            >
-              <p>
-                Hôm nay là một ngày thật đặc biệt, ngày để anh có thể bày tỏ hết
-                những tình cảm mà đôi khi anh vụng về chưa thể nói hết. Cảm ơn
-                em đã đến bên anh, mang theo tất cả những điều dịu dàng và tốt
-                đẹp nhất.
-              </p>
-              <p>
-                Cảm ơn em vì đã luôn là nguồn động lực, là nơi bình yên để anh
-                tìm về sau những mệt mỏi. Mỗi khoảnh khắc ở bên em đều là một
-                món quà vô giá. Anh mong rằng chúng ta sẽ cùng nhau tạo nên thật
-                nhiều, thật nhiều những kỷ niệm đẹp hơn nữa.
-              </p>
-              <p>
-                Chúc em một ngày 20/10 luôn xinh đẹp, hạnh phúc và rạng rỡ. Hãy
-                luôn nhớ rằng, có một người luôn ở đây, yêu thương và trân trọng
-                em hết mực.
-              </p>
-            </div>
-            <div class="mt-8 text-right">
-              <p class="font-handwriting text-3xl text-gray-800">
-                Yêu bé của anh rất nhiều,
-              </p>
-              <p class="font-handwriting text-3xl text-pink-600">Quang Minh</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="bg-gray-800 text-white text-center p-4">
-      <p>Made with ❤️ by Quang Minh</p>
-    </footer>
+        <footer class="bg-gray-800 text-white text-center p-4">
+          <p>Made with ❤️ by Quang Minh</p>
+        </footer>
+    </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-   <script>
-      AOS.init({
-          once: true, // Animation chỉ chạy 1 lần
-          duration: 1000, // Thời gian animation
+    <script>
+      // Logic cho preloader
+      window.addEventListener("load", () => {
+        const preloader = document.getElementById("preloader");
+        const mainContent = document.getElementById("main-content");
+
+        // Chờ cho thanh loading chạy xong (3 giây) + 0.5s trễ
+        setTimeout(() => {
+          // Làm mờ preloader
+          preloader.style.opacity = "0";
+
+          // Sau khi mờ xong, ẩn nó đi và hiện nội dung chính
+          setTimeout(() => {
+            preloader.style.display = "none";
+            mainContent.style.opacity = "1";
+            mainContent.style.transition = "opacity 1s ease-in-out";
+
+            // Khởi tạo AOS animations sau khi nội dung đã hiện
+            AOS.init({
+              once: true,
+              duration: 1000,
+            });
+          }, 1000); // Thời gian này phải khớp với transition-opacity của preloader
+        }, 3500);
       });
 
       // Logic cho hiệu ứng lật thẻ
-      const cards = document.querySelectorAll('.flip-card');
-      cards.forEach(card => {
-        card.addEventListener('click', function() {
-          const cardInner = card.querySelector('.flip-card-inner');
+      const cards = document.querySelectorAll(".flip-card");
+      cards.forEach((card) => {
+        card.addEventListener("click", function () {
+          const cardInner = card.querySelector(".flip-card-inner");
           if (cardInner) {
-            cardInner.classList.toggle('is-flipped');
+            cardInner.classList.toggle("is-flipped");
           }
         });
       });
     </script>
   </body>
 </html>
+
