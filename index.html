@@ -94,6 +94,17 @@
       #loading-bar {
         animation: loading 3s ease-in-out forwards;
       }
+      
+      /* Sửa lỗi hiển thị của AOS */
+      [data-aos] {
+        pointer-events: none;
+      }
+      .aos-animate {
+        pointer-events: auto;
+      }
+      html:not(.no-js) [data-aos^=fade][data-aos^=fade] {
+        transition-property: opacity,transform;
+      }
     </style>
     <!-- animation -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -201,7 +212,8 @@
                     />
                     <h3 class="font-bold text-gray-800 text-xl">Buổi hẹn thứ 2</h3>
                     <p class="text-sm leading-snug tracking-wide text-gray-600">
-                      Cảm giác hồi hộp lo lắng bao trùm lấy anh, đôi khi còn là sự lúng túng, nhưng thật vui khi có em chủ động
+                      Buổi tối hôm ấy, anh biết mình đã 'say' em thật rồi. Nụ cười
+                      của em làm bừng sáng cả thế giới.
                     </p>
                   </div>
                 </div>
@@ -880,6 +892,11 @@
               once: true,
               duration: 1000,
             });
+            // Làm mới AOS để tính toán lại vị trí
+             setTimeout(() => {
+                AOS.refresh();
+            }, 50);
+
           }, 1000); // Thời gian này phải khớp với transition-opacity của preloader
         }, 3500);
       });
